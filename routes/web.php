@@ -65,3 +65,8 @@ Route::group(['prefix' => 'admin'], function(){
 
 //====================== Website route =========================
 Route::get('/', [App\Http\Controllers\FrontendController::class, 'index'])->name('website');
+
+//====================== Cart route ============================
+Route::post('/cart/add/{id}', [App\Http\Controllers\CartController::class, 'Addcart'])->name('add.cart');
+Route::get('/cart', [App\Http\Controllers\CartController::class, 'showCart'])->name('show.cart');
+Route::get('/cart/destroy/{id}', [App\Http\Controllers\CartController::class, 'destroyCart'])->name('destroy.cart');

@@ -2,9 +2,11 @@
 <link href="{{asset('frontend')}}/css/font-awesome.min.css" rel="stylesheet">
 <link href="{{asset('frontend')}}/css/prettyPhoto.css" rel="stylesheet">
 <link href="{{asset('frontend')}}/css/price-range.css" rel="stylesheet">
-<link href="{{asset('frontend')}}/css/animate.css" rel="stylesheet">
+<link href="{{asset('frontend')}}/css/animate.css" rel="stylesheet"> 
 <link href="{{asset('frontend')}}/css/main.css" rel="stylesheet">
 <link href="{{asset('frontend')}}/css/responsive.css" rel="stylesheet">
+<!-- Toastr style link -->
+<link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
 <!--[if lt IE 9]>
 <script src="js/html5shiv.js"></script>
 <script src="js/respond.min.js"></script>
