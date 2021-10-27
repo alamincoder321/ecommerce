@@ -70,3 +70,4 @@ Route::get('/', [App\Http\Controllers\FrontendController::class, 'index'])->name
 Route::post('/cart/add/{id}', [App\Http\Controllers\CartController::class, 'Addcart'])->name('add.cart');
 Route::get('/cart', [App\Http\Controllers\CartController::class, 'showCart'])->name('show.cart');
 Route::get('/cart/destroy/{id}', [App\Http\Controllers\CartController::class, 'destroyCart'])->name('destroy.cart');
+Route::post('/cart/update/{id}', [App\Http\Controllers\CartController::class, 'Updatecart'])->name('update.cart');

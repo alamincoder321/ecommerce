@@ -32,7 +32,7 @@ class CartController extends Controller
 
     public function showCart()
     {
-        $carts = Cart::all()->where('user_ip', request()->ip());
+        $carts = Cart::where('user_ip', request()->ip())->latest()->get();
         $total = Cart::all()->where('user_ip', request()->ip())->sum(
             function($t){
                 return $t->qnty * $t->product->price;
@@ -43,9 +43,17 @@ class CartController extends Controller
 
     public function destroyCart($id)
     {
-        Cart::findOrFail($id)->delete();
+        Cart::where('id', $id)->where('user_ip', request()->ip())->delete();
 
         Toastr::error('Cart Product delete successfully!');
+        return back();
+    }
+
+    public function Updatecart(Request $request, $id)
+    {
+        Cart::where('id', $id)->where('user_ip', request()->ip())->update(['qnty' => $request->qnty]);
+
+        Toastr::success('Cart Product update successfully!');
         return back();
     }
 }

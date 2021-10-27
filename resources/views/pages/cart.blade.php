@@ -35,16 +35,18 @@
 							</td>
 							<td class="cart_quantity">
 								<div class="cart_quantity_button">
-									<a class="cart_quantity_up" href=""> + </a>
-									<input class="cart_quantity_input" type="text" name="quantity" value="{{$cart->qnty}}" autocomplete="off" size="2">
-									<a class="cart_quantity_down" href=""> - </a>
+									<form action="{{route('update.cart', $cart->id)}}" method="POST">
+									@csrf
+										<input class="cart_quantity_input" type="text" name="qnty" value="{{$cart->qnty}}" autocomplete="off" size="2">
+										<button type="submit" class="btn btn-info btn-sm" style="margin: 0 0 0 8px;"><i class="fa fa-edit"></i></button>
+									</form>
 								</div>
 							</td>
 							<td class="cart_total">
 								<p class="cart_total_price">${{$cart->qnty * $cart->product->price}}</p>
 							</td>
 							<td class="cart_delete">
-								<a class="cart_quantity_delete" href="{{route('destroy.cart', $cart->id)}}"><i class="fa fa-times"></i></a>
+								<a class="cart_quantity_delete" href="{{route('destroy.cart', $cart->id)}}"><i class="fa fa-times text-warning"></i></a>
 							</td>
 						</tr>
 						@endforeach
@@ -77,9 +79,8 @@
 					<div class="total_area">
 						<ul>
 							<li>Cart Sub Total <span>${{$total}}</span></li>
-							<li>Total <span>$61</span></li>
+							<li>Total <span>${{$total}}</span></li>
 						</ul>
-							<a class="btn btn-default update" href="">Update</a>
 							<a class="btn btn-default check_out" href="">Check Out</a>
 					</div>
 				</div>
