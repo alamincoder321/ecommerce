@@ -21,7 +21,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading"><h3 class="panel-title">Coupon update</h3></div>
                 <div class="panel-body">
-                    <form role="form" action="{{route ('coupon.store')}}" method="POST">
+                    <form role="form" action="{{route ('coupon.update', $coupon->id)}}" method="POST">
                     @csrf
                     @method('PUT')
                         <div class="form-group">

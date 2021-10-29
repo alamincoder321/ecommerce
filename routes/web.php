@@ -71,3 +71,5 @@ Route::post('/cart/add/{id}', [App\Http\Controllers\CartController::class, 'Addc
 Route::get('/cart', [App\Http\Controllers\CartController::class, 'showCart'])->name('show.cart');
 Route::get('/cart/destroy/{id}', [App\Http\Controllers\CartController::class, 'destroyCart'])->name('destroy.cart');
 Route::post('/cart/update/{id}', [App\Http\Controllers\CartController::class, 'Updatecart'])->name('update.cart');
+Route::post('/coupon', [App\Http\Controllers\CartController::class, 'Applycoupon'])->name('coupon.apply');
+Route::get('/coupon/delete', [App\Http\Controllers\CartController::class, 'delete'])->name('coupon.destroy');

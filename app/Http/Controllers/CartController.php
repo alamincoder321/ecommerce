@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Brian2694\Toastr\Facades\Toastr;
 use App\Models\Cart;
+use App\Models\Coupon;
 use Carbon\Carbon;
+use Session;
 class CartController extends Controller
 {
     public function Addcart(Request $request, $id)
@@ -55,5 +57,36 @@ class CartController extends Controller
 
         Toastr::success('Cart Product update successfully!');
         return back();
+    }
+
+
+    //========================= Coupon Apply ==================
+
+    public function Applycoupon(Request $request)
+    {
+        $check = Coupon::where('name', $request->name)->first();
+
+        if ($check) {
+            Session::put('coupon', [
+                'name' => $check->name,
+                'discount' => $check->discount,
+            ]);
+
+            Toastr::success('Coupon Apply successfully!');
+            return back();
+        }else{
+            Toastr::error('No Any Coupon on Your Cart!');
+            return back();
+        }
+    }
+
+    public function delete()
+    {
+        if (Session::has('coupon')) {
+            Session::forget('coupon');
+
+            Toastr::error('Coupon delete successfully!');
+            return back();
+        }
     }
 }

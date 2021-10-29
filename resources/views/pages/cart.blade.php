@@ -38,7 +38,7 @@
 									<form action="{{route('update.cart', $cart->id)}}" method="POST">
 									@csrf
 										<input class="cart_quantity_input" type="text" name="qnty" value="{{$cart->qnty}}" autocomplete="off" size="2">
-										<button type="submit" class="btn btn-info btn-sm" style="margin: 0 0 0 8px;"><i class="fa fa-edit"></i></button>
+										<button type="submit" class="btn btn-info btn-sm" style="margin: 0 0 0 8px;"><i class="fa fa-check"></i></button>
 									</form>
 								</div>
 							</td>
@@ -63,26 +63,47 @@
 			</div>
 			<div class="row">
 				<div class="col-sm-6">
+				@if(Session::has('coupon'))
+				@else
 					<div class="chose_area">
 						<ul class="user_option">
 							<li class="text-center">
-							<form action="">							
+							<form action="{{route('coupon.apply')}}" method="POST">
+							@csrf							
 								<label>Use Coupon Code</label>
 								<input type="text" name="name" class="form-control" autocomplete="off" placeholder="Coupon name"><br>
-								<button type="submit" class="btn btn-warning btn-sm">Submit</button>
+								<button type="submit" class="btn btn-warning btn-sm">Apply Coupon</button>
 							</form>
 							</li>
 						</ul>
 					</div>
+				@endif					
 				</div>
 				<div class="col-sm-6">
-					<div class="total_area">
-						<ul>
-							<li>Cart Sub Total <span>${{$total}}</span></li>
-							<li>Total <span>${{$total}}</span></li>
-						</ul>
-							<a class="btn btn-default check_out" href="">Check Out</a>
-					</div>
+					@if(Session::has('coupon'))
+						<div class="total_area">
+							<ul>
+								<li>Cart Sub Total <span>${{$total}}</span></li>
+								<li>Coupon Name <span>{{Session::get('coupon')['name']}}</span></li>
+								<li>Coupon Delete
+									<span>
+										<a href="{{route('coupon.destroy')}}"><i class="fa fa-times text-warning"></i></a>
+									</span>
+								</li>
+								<li>Discount <span>${{$discount = $total * Session::get('coupon')['discount']/100}}</span></li>
+								<li>Cart Total <span>${{$total-$discount}}</span></li>
+							</ul>
+								<a class="btn btn-default check_out" href="">Check Out</a>
+						</div>
+					@else
+						<div class="total_area">
+							<ul>
+								<li>Cart Sub Total <span>${{$total}}</span></li>
+								<li>Total <span>${{$total}}</span></li>
+							</ul>
+								<a class="btn btn-default check_out" href="">Check Out</a>
+						</div>
+					@endif
 				</div>
 			</div>
 		</div>
