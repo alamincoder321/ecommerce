@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\Brand;
 use App\Models\Slider;
 use App\Models\Category;
-use App\Models\Subcategory;
 use App\Models\Product;
 use App\Models\Cart;
 class FrontendController extends Controller

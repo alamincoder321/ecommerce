@@ -963,8 +963,20 @@ h2.title {
     padding-left: 0;
     padding-right: 0;
 }
+.choose ul li button {
+    color: #B3AFA8;
+    font-family: 'Roboto', sans-serif;
+    font-size: 13px;
+    padding-left: 0;
+    padding-right: 0;
+    border: none;
+    background: none;
+}
 
 .choose ul li a i {
+    margin-right: 5px;
+}
+.choose ul li button i {
     margin-right: 5px;
 }
 
@@ -973,6 +985,10 @@ h2.title {
     color: #FE980F;
 }
 
+.choose ul li button:hover {
+    background: none;
+    color: #FE980F;
+}
 .category-tab {
     overflow: hidden;
 }

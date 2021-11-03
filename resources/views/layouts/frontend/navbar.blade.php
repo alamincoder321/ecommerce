@@ -60,13 +60,32 @@
                     <div class="shop-menu clearfix pull-right">
                         @php
                          $qnty = App\Models\Cart::where('user_ip', request()->ip())->sum('qnty');
+                         $t = App\Models\Wishlist::where('user_id', Auth::id())->sum('qnty');
                         @endphp
                         <ul class="nav navbar-nav">
-                            <li><a href=""><i class="fa fa-user"></i> Account</a></li>
-                            <li><a href=""><i class="fa fa-star"></i> Wishlist</a></li>
+                            <li><a href="">
+                                @auth
+                                <i class="fa fa-user"></i><span class="text-danger font-weight-bold">{{ucwords(Auth::user()->name)}}</span>
+                                @else
+                                <i class="fa fa-user"></i>Account
+                                @endauth
+                            </a></li>
+                            <li><a href="{{route("show.wishlist")}}"><i class="fa fa-star"></i> Wishlist @auth<span class="text-danger">->{{$t}}</span>@endauth</a></li>
                             <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
                             <li><a href="{{route('show.cart')}}"><i class="fa fa-shopping-cart"></i> <span class="text-danger">{{$qnty}}</span> Cart</a></li>
-                            <li><a href="login.html"><i class="fa fa-lock"></i> Login</a></li>
+                            @auth                            
+                            <li>
+                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <i class="fa fa-lock"></i>{{ __('Logout') }}
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                                </form>
+                            </li>
+                            @else
+                            <li><a href="{{route('login')}}"><i class="fa fa-lock"></i> Login</a></li>
+                            @endauth
                         </ul>
                     </div>
                 </div>
@@ -91,11 +110,16 @@
                             <li><a href="{{route('website')}}" class="active">Home</a></li>
                             <li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
                                 <ul role="menu" class="sub-menu">
-                                    <li><a href="shop.html">Products</a></li>
+                                    <li><a href="{{route('allproduct')}}">Products</a></li>
                                     <li><a href="product-details.html">Product Details</a></li> 
                                     <li><a href="checkout.html">Checkout</a></li> 
-                                    <li><a href="{{route('show.cart')}}">Cart</a></li> 
-                                    <li><a href="login.html">Login</a></li> 
+                                    <li><a href="{{route('show.cart')}}">Cart</a></li>
+                                    @auth
+                                    <br> 
+                                    <li class="hidden"><a href="{{route('login')}}">Login</a></li>
+                                    @else
+                                    <li><a href="{{route('login')}}">Login</a></li>
+                                    @endauth 
                                 </ul>
                             </li> 
                             <li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>

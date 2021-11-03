@@ -66,6 +66,9 @@ Route::group(['prefix' => 'admin'], function(){
 //====================== Website route =========================
 Route::get('/', [App\Http\Controllers\FrontendController::class, 'index'])->name('website');
 
+//======================= All product route ======================
+Route::get('/products', [App\Http\Controllers\ProductController::class, 'index'])->name('allproduct');
+
 //====================== Cart route ============================
 Route::post('/cart/add/{id}', [App\Http\Controllers\CartController::class, 'Addcart'])->name('add.cart');
 Route::get('/cart', [App\Http\Controllers\CartController::class, 'showCart'])->name('show.cart');
@@ -73,3 +76,9 @@ Route::get('/cart/destroy/{id}', [App\Http\Controllers\CartController::class, 'd
 Route::post('/cart/update/{id}', [App\Http\Controllers\CartController::class, 'Updatecart'])->name('update.cart');
 Route::post('/coupon', [App\Http\Controllers\CartController::class, 'Applycoupon'])->name('coupon.apply');
 Route::get('/coupon/delete', [App\Http\Controllers\CartController::class, 'delete'])->name('coupon.destroy');
+//====================== End Cart route ============================
+
+//====================== Start wishlist route ============================
+Route::get('/wishlist/add/{id}', [App\Http\Controllers\WishlistController::class, 'Addwishlist'])->name('add.wishlist');
+Route::get('/wishlist', [App\Http\Controllers\WishlistController::class, 'showWishlist'])->name('show.wishlist');
+Route::get('/wishlist/destroy/{id}', [App\Http\Controllers\WishlistController::class, 'destroyWishlist'])->name('destroy.wishlist');
